@@ -1,4 +1,5 @@
-# Load data
+# Load data from file (assuming that file is in current directory)
+# Missing values are handled using the na.string option of read.csv  
 data <- read.csv("household_power_consumption.txt", 
                  sep = ";", 
                  na.strings = c("?", "NA")
@@ -9,13 +10,18 @@ data$ts <- strptime(paste(data$Date, data$Time),
                     format = "%d/%m/%Y %H:%M:%S"
 )
 
-# Subset on date range
+# Subset on date range [2007-02-01,2007-02-02]
 df <- subset(x = data, ts >= "2007-02-01" & ts < "2007-02-03")
 
-# Plot graphs
+# --- Plot the four graphs
+
+# Prepare png device
 png(filename = "plot4.png", width = 480, height = 480)
 
+# Set layout to a 2x2 matrix
 par(mfrow=c(2,2))
+
+# Limit overall fontsize
 par(cex = 0.8)
 
 # Plot 1.1 - Global Active Power
@@ -45,3 +51,4 @@ plot(df$ts,df$Global_reactive_power, type ="l", xlab = "datetime", ylab = "Globa
 
 # Close png device
 dev.off()
+
