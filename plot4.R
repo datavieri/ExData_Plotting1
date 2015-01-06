@@ -16,7 +16,7 @@ df <- subset(x = data, ts >= "2007-02-01" & ts < "2007-02-03")
 png(filename = "plot4.png", width = 480, height = 480)
 
 par(mfrow=c(2,2))
-par(cex = 0.65)
+par(cex = 0.8)
 
 # Plot 1.1 - Global Active Power
 plot(df$ts,df$Global_active_power, type ="l", xlab = "", ylab = "Global Active Power")
