@@ -27,31 +27,23 @@ png(filename = "plot3.png", width = 480, height = 480)
 # Limit overall fontsize to 80%
 par(cex = 0.8)
 
-# Plot Sub_metering_1 (black)
-plot(df$ts,df$Sub_metering_1, type ="l", xlab = "", 
-     ylab = "Energy sub metering", 
-     ylim = subMeterLimits)
+with(df, {
+    # Create line graph for Sub_metering_1
+    plot(ts, Sub_metering_1, type = "l", ylim = subMeterLimits,
+         xlab = "", ylab = "Energy sub metering"
+    )
+    # Add Sub_metering_2
+    lines(ts, Sub_metering_2, col = "red")
+    # Add Sub_metering_3
+    lines(ts, Sub_metering_3, col = "blue")
+})
 
-# Add to existing plot
-par(new = TRUE)
-
-# Add Sub_metering_2 (red)
-plot(df$ts,df$Sub_metering_2, type ="l", xlab = "", ylab = "", 
-     ylim = subMeterLimits, col = "red")
-
-# Add to existing plot
-par(new = TRUE)
-
-# Add Sub_metering_2 (red)
-plot(df$ts,df$Sub_metering_3, type ="l", xlab = "", ylab = "", 
-     ylim = subMeterLimits, col = "blue")
-
-# Add legend
+# Add top-right legend
 legend("topright", 
        legend = c("Sub_metering_1","Sub_metering_2","Sub_metering_3"), 
        col= c("black","red","blue"), 
        lty = 1 
-       )
+)
 
 # Close png device
 dev.off()

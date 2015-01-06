@@ -37,15 +37,18 @@ plot(df$ts,df$Global_active_power, type ="l", xlab = "", ylab = "Global Active P
 plot(df$ts,df$Voltage, type ="l", xlab = "datetime", ylab = "Voltage")
 
 # Plot 2.1 - Sub Metering
-plot(df$ts,df$Sub_metering_1, type ="l", xlab = "", 
-       ylab = "Energy sub metering", 
-       ylim = subMeterLimits)
-par(new = TRUE)
-plot(df$ts,df$Sub_metering_2, type ="l", xlab = "", ylab = "", 
-       ylim = subMeterLimits, col = "red")
-par(new = TRUE)
-plot(df$ts,df$Sub_metering_3, type ="l", xlab = "", ylab = "", 
-       ylim = subMeterLimits, col = "blue")
+with(df, {
+    # Create line graph for Sub_metering_1
+    plot(ts, Sub_metering_1, type = "l", ylim = subMeterLimits,
+         xlab = "", ylab = "Energy sub metering"
+    )
+    # Add Sub_metering_2
+    lines(ts, Sub_metering_2, col = "red")
+    # Add Sub_metering_3
+    lines(ts, Sub_metering_3, col = "blue")
+})
+
+# Add top-right legend to Plot 2.1
 legend("topright", 
        legend = c("Sub_metering_1","Sub_metering_2","Sub_metering_3"), 
        col= c("black","red","blue"), 
