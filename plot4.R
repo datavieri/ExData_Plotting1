@@ -13,6 +13,12 @@ data$ts <- strptime(paste(data$Date, data$Time),
 # Subset on date range [2007-02-01,2007-02-02]
 df <- subset(x = data, ts >= "2007-02-01" & ts < "2007-02-03")
 
+# Evaluate common ylim range for sub metering (Plot 2.1)
+subMeterLimits <- c(
+    min(df$Sub_metering_1, df$Sub_metering_2, df$Sub_metering_3), 
+    max(df$Sub_metering_1, df$Sub_metering_2, df$Sub_metering_3)
+)
+
 # --- Plot the four graphs
 
 # Prepare png device
